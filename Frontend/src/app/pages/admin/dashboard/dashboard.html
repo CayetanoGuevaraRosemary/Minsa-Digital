@@ -1,1 +1,79 @@
-<p>dashboard works!</p>
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h3 class="fw-bold mb-0" style="color: #1a2b3c;">
+        Hola, {{ nombreAdmin }}
+      </h3>
+      <p class="text-muted mb-0">Panel de administración de Minsa Digital</p>
+    </div>
+    <button class="btn btn-outline-secondary" (click)="cerrarSesion()">
+      Cerrar sesión
+    </button>
+  </div>
+
+  <div class="row g-3">
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/pacientes')">
+        <div class="card-body">
+          <i class="bi bi-person-heart fs-2 text-info"></i>
+          <h5 class="fw-bold mt-2" style="color: #1a2b3c;">Pacientes</h5>
+          <p class="text-muted mb-0">Registro y listado de pacientes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 bg-light">
+        <div class="card-body">
+          <i class="bi bi-person-badge fs-2 text-muted"></i>
+          <h5 class="fw-bold mt-2 text-muted">Médicos</h5>
+          <p class="text-muted mb-0">Próximamente</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 bg-light">
+        <div class="card-body">
+          <i class="bi bi-calendar-check fs-2 text-muted"></i>
+          <h5 class="fw-bold mt-2 text-muted">Citas</h5>
+          <p class="text-muted mb-0">Próximamente</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 bg-light">
+        <div class="card-body">
+          <i class="bi bi-hospital fs-2 text-muted"></i>
+          <h5 class="fw-bold mt-2 text-muted">Establecimientos</h5>
+          <p class="text-muted mb-0">Próximamente</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 bg-light">
+        <div class="card-body">
+          <i class="bi bi-capsule fs-2 text-muted"></i>
+          <h5 class="fw-bold mt-2 text-muted">Medicamentos y Recetas</h5>
+          <p class="text-muted mb-0">Próximamente</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 bg-light">
+        <div class="card-body">
+          <i class="bi bi-clipboard2-pulse fs-2 text-muted"></i>
+          <h5 class="fw-bold mt-2 text-muted">Vacunas y Referencias</h5>
+          <p class="text-muted mb-0">Próximamente</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

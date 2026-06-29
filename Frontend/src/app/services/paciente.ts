@@ -16,7 +16,7 @@ export class Paciente {
   }
 
   obtener(id: number): Observable<PacienteResponse> {
-    return this.http.get<PacienteResponse>(`${this.apiURL}/eliminar/${id}`);
+    return this.http.get<PacienteResponse>(`${this.apiURL}/${id}`);
   }
 
   guardar(paciente: PacienteResponse): Observable<any> {

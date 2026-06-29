@@ -7,10 +7,8 @@
         </div>
         <div class="card-body">
 
-          @if (error) {
-            <div class="alert alert-danger">{{ error }}</div>
-          }
-
+          <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
+          
           <form #pacienteForm="ngForm" (ngSubmit)="guardar()">
             <div class="row">
               <div class="col-md-4 mb-3">

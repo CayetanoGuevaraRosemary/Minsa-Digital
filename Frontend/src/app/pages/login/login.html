@@ -39,6 +39,8 @@
 
         <h2 class="text-center fw-bold mb-4" style="color: #1a2b3c;">Ingresa a Minsa Digital</h2>
 
+         <div class="alert alert-danger py-2" [hidden]="!error">{{ error }}</div>
+
         <ul class="nav nav-tabs nav-justified mb-4">
           <li class="nav-item">
             <button type="button" class="nav-link" [class.active]="modo === 'paciente'" (click)="modo = 'paciente'">

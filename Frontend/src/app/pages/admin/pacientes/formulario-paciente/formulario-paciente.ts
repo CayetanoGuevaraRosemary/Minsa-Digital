@@ -1,5 +1,4 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PacienteResponse } from '../../../../model/paciente-response';
@@ -7,7 +6,7 @@ import { Paciente } from '../../../../services/paciente';
 
 @Component({
   selector: 'app-formulario-paciente',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   templateUrl: './formulario-paciente.html',
   styleUrl: './formulario-paciente.css',
 })

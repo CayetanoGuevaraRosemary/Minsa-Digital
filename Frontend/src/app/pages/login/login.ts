@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Autenticacion } from '../../services/autenticacion';
+import { Sesion } from '../../services/sesion';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -23,6 +23,7 @@ export class Login {
 
   constructor(
     private autenticacion: Autenticacion,
+    private sesion: Sesion,
     private router: Router
   ) {}
 
@@ -33,6 +34,7 @@ export class Login {
         if (typeof data === 'string') {
           this.error = data;
         } else {
+          this.sesion.iniciar(data, 'paciente');
           this.router.navigate(['/paciente/dashboard']);
         }
       },
@@ -49,6 +51,7 @@ export class Login {
         if (typeof data === 'string') {
           this.error = data;
         } else {
+          this.sesion.iniciar(data, 'admin');
           this.router.navigate(['/admin/dashboard']);
         }
       },
