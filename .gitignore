@@ -1,0 +1,9 @@
+# Carpetas de librerías y caché (no deben subirse)
+node_modules/
+.angular/
+dist/
+.vscode/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
