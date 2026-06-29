@@ -397,3 +397,34 @@ app.post("/admin/log/guardar", (req, res) => {
         res.json("Log registrado")
     })
 })
+
+// ENDPOINTS LOGIN
+app.post("/login/paciente", (req, res) => {
+    conexion.query(
+        "SELECT * FROM usuarios_pacientes WHERE numero_documento = ? AND password_hash = ?",
+        [req.body.numero_documento, req.body.password_hash],
+        (error, rpta) => {
+            if (error) return console.error(error.message)
+            if (rpta.length > 0) {
+                res.json(rpta[0])
+            } else {
+                res.json("Documento o contraseña incorrectos")
+            }
+        }
+    )
+})
+
+app.post("/login/admin", (req, res) => {
+    conexion.query(
+        "SELECT * FROM admin_usuarios WHERE email = ? AND password_hash = ?",
+        [req.body.email, req.body.password_hash],
+        (error, rpta) => {
+            if (error) return console.error(error.message)
+            if (rpta.length > 0) {
+                res.json(rpta[0])
+            } else {
+                res.json("Correo o contraseña incorrectos")
+            }
+        }
+    )
+})

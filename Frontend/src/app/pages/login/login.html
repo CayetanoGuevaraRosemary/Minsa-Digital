@@ -1,1 +1,112 @@
-<p>login works!</p>
+<div class="container-fluid">
+  <div class="row min-vh-100">
+
+    <div class="col-md-6 bg-light-subtle d-flex flex-column p-5" style="background-color: #eaf4fb;">
+
+      <div class="d-flex align-items-center gap-3 mb-5">
+        <div class="d-flex align-items-center gap-2">
+          <span class="fs-2">🇵🇪</span>
+          <div class="small lh-sm">
+            <div class="fw-bold">PERÚ</div>
+            <div class="text-muted">Ministerio<br>de Salud</div>
+          </div>
+        </div>
+        <span class="vr" style="height: 36px;"></span>
+        <div class="d-flex align-items-center gap-2 text-info fw-bold fs-5">
+          <i class="bi bi-hand-index-thumb-fill fs-3"></i>
+          <span>Minsa<br>Digital</span>
+        </div>
+      </div>
+
+      <h1 class="fw-bold mb-4" style="color: #1a2b3c;">
+        Te damos la bienvenida a<br>
+        <span class="text-primary">Minsa Digital</span>
+      </h1>
+
+      <p class="fw-bold mb-2" style="color: #1a2b3c;">Desde aquí podrás:</p>
+      <ul class="text-primary">
+        <li>Ver tu Carné de Vacunación</li>
+        <li>Reservar tus citas médicas</li>
+        <li>Consultar el estado de tus referencias médicas</li>
+        <li>Revisar tus recetas médicas</li>
+        <li>Ver tu historial citas, entre otros</li>
+      </ul>
+
+    </div>
+
+    <div class="col-md-6 d-flex align-items-center justify-content-center p-5 bg-white">
+      <div class="w-100" style="max-width: 380px;">
+
+        <h2 class="text-center fw-bold mb-4" style="color: #1a2b3c;">Ingresa a Minsa Digital</h2>
+
+        <ul class="nav nav-tabs nav-justified mb-4">
+          <li class="nav-item">
+            <button type="button" class="nav-link" [class.active]="modo === 'paciente'" (click)="modo = 'paciente'">
+              Paciente
+            </button>
+          </li>
+          <li class="nav-item">
+            <button type="button" class="nav-link" [class.active]="modo === 'admin'" (click)="modo = 'admin'">
+              Administrador
+            </button>
+          </li>
+        </ul>
+
+        <form [hidden]="modo !== 'paciente'" #loginPacienteForm="ngForm" (ngSubmit)="ingresarPaciente()">
+
+          <label class="form-label fw-semibold mt-2">Tipo de documento</label>
+          <select class="form-select mb-3" name="tipoDocumento" [(ngModel)]="tipoDocumento">
+            <option value="DNI">DNI - Documento Nacional de Identidad</option>
+            <option value="CE">CE - Carné de Extranjería</option>
+          </select>
+
+          <label class="form-label fw-semibold">Número de documento</label>
+          <input type="text" class="form-control mb-3" name="documento"
+                 [(ngModel)]="documento" placeholder="Ingresa tu número de documento" required>
+
+          <label class="form-label fw-semibold">Contraseña</label>
+          <div class="input-group mb-2">
+            <input [type]="verPassword ? 'text' : 'password'" class="form-control" name="password"
+                   [(ngModel)]="password" placeholder="Ingresa tu contraseña" required>
+            <span class="input-group-text bg-white" role="button" (click)="verPassword = !verPassword">
+              <i class="bi" [class.bi-eye]="!verPassword" [class.bi-eye-slash]="verPassword"></i>
+            </span>
+          </div>
+
+          <a href="javascript:void(0)" class="d-block small text-primary mb-3">¿Olvidaste tu contraseña?</a>
+
+          <button type="submit" class="btn btn-info text-white w-100 fw-semibold" [disabled]="!loginPacienteForm.valid">
+            Ingresar de manera segura
+          </button>
+        </form>
+
+        <form [hidden]="modo !== 'admin'" #loginAdminForm="ngForm" (ngSubmit)="ingresarAdmin()">
+
+          <label class="form-label fw-semibold mt-2">Correo electrónico</label>
+          <input type="email" class="form-control mb-3" name="email"
+                 [(ngModel)]="email" placeholder="Ingresa tu correo electrónico" required>
+
+          <label class="form-label fw-semibold">Contraseña</label>
+          <div class="input-group mb-2">
+            <input [type]="verPassword ? 'text' : 'password'" class="form-control" name="password"
+                   [(ngModel)]="password" placeholder="Ingresa tu contraseña" required>
+            <span class="input-group-text bg-white" role="button" (click)="verPassword = !verPassword">
+              <i class="bi" [class.bi-eye]="!verPassword" [class.bi-eye-slash]="verPassword"></i>
+            </span>
+          </div>
+
+          <a href="javascript:void(0)" class="d-block small text-primary mb-3">¿Olvidaste tu contraseña?</a>
+
+          <button type="submit" class="btn btn-info text-white w-100 fw-semibold" [disabled]="!loginAdminForm.valid">
+            Ingresar de manera segura
+          </button>
+        </form>
+
+        <p class="text-center text-muted small mt-4 mb-1">Si eres mayor de 18 años, podrás acceder a la plataforma</p>
+        <a href="javascript:void(0)" class="d-block text-center fw-semibold text-primary">¿Eres nuevo? Crea tu cuenta</a>
+
+      </div>
+    </div>
+
+  </div>
+</div>
