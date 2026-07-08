@@ -22,6 +22,8 @@ import { ReservarCita } from './pages/paciente/reservar-cita/reservar-cita';
 import { MisRecetas } from './pages/paciente/mis-recetas/mis-recetas';
 import { MisVacunas } from './pages/paciente/mis-vacunas/mis-vacunas';
 import { MisReferencias } from './pages/paciente/mis-referencias/mis-referencias';
+import { ListaEspecialidades } from './pages/admin/especialidades/lista-especialidades/lista-especialidades';
+import { FormularioEspecialidad } from './pages/admin/especialidades/formulario-especialidad/formulario-especialidad';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -45,6 +47,8 @@ export const routes: Routes = [
   { path: 'admin/vacunas', component: ListaVacunas },
   { path: 'admin/establecimientos', component: ListaEstablecimientos },
   { path: 'admin/establecimientos/nuevo', component: FormularioEstablecimiento },
+  { path: 'admin/especialidades', component: ListaEspecialidades },
+  { path: 'admin/especialidades/nuevo', component: FormularioEspecialidad },
 
   // PACIENTE
   { path: 'paciente/dashboard', component: DashboardPaciente },
