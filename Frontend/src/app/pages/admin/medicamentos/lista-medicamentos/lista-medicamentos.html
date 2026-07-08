@@ -1,1 +1,38 @@
-<p>lista-medicamentos works!</p>
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h3 class="fw-bold mb-0" style="color: #1a2b3c;">Medicamentos Registrados</h3>
+      <p class="text-muted mb-0">Gestión de medicamentos de Minsa Digital</p>
+    </div>
+    <button class="btn btn-info text-white fw-semibold" (click)="nuevoMedicamento()">
+      Nuevo Medicamento
+    </button>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr style="background-color: #eaf4fb;">
+              <th class="ps-3" style="color: #1a2b3c;">ID</th>
+              <th style="color: #1a2b3c;">Nombre</th>
+              <th style="color: #1a2b3c;">Presentación</th>
+              <th style="color: #1a2b3c;">Concentración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listaMedicamentos()">
+              <td class="ps-3">{{ item.id_medicamento }}</td>
+              <td>{{ item.nombre }}</td>
+              <td>{{ item.presentacion }}</td>
+              <td>{{ item.concentracion }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

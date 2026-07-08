@@ -1,1 +1,43 @@
-<p>formulario-medicamento works!</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Nuevo Medicamento</h4>
+        </div>
+        <div class="card-body">
+
+          <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
+
+          <form #medicamentoForm="ngForm" (ngSubmit)="guardar()">
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="nombre" [(ngModel)]="medicamento().nombre" required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Presentación</label>
+                <input type="text" class="form-control" name="presentacion" [(ngModel)]="medicamento().presentacion" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Concentración</label>
+                <input type="text" class="form-control" name="concentracion" [(ngModel)]="medicamento().concentracion" required>
+              </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!medicamentoForm.valid">
+                <i class="bi bi-save me-1"></i>Guardar
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
