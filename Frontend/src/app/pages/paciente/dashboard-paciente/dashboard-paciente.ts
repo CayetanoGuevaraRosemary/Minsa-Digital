@@ -20,6 +20,10 @@ export class DashboardPaciente {
     }
   }
 
+  irA(ruta: string) {
+    this.router.navigate([ruta]);
+  }
+
   cerrarSesion() {
     this.sesion.cerrar();
     this.router.navigate(['/login']);

@@ -1,1 +1,47 @@
-<p>mis-referencias works!</p>
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
+
+  <button class="btn btn-link text-decoration-none px-0 mb-3" (click)="volver()">
+    <i class="bi bi-arrow-left"></i> Volver al inicio
+  </button>
+
+  <div class="mb-4">
+    <h3 class="fw-bold mb-0" style="color: #1a2b3c;">Mis Referencias</h3>
+    <p class="text-muted mb-0">Historial de tus referencias médicas</p>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr style="background-color: #eaf4fb;">
+              <th class="ps-3" style="color: #1a2b3c;">ID</th>
+              <th style="color: #1a2b3c;">Estab. Origen</th>
+              <th style="color: #1a2b3c;">Estab. Destino</th>
+              <th style="color: #1a2b3c;">Especialidad</th>
+              <th style="color: #1a2b3c;">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of misReferencias()">
+              <td class="ps-3">{{ item.id_referencia }}</td>
+              <td>{{ item.id_establecimiento_origen }}</td>
+              <td>{{ item.id_establecimiento_destino }}</td>
+              <td>{{ item.id_especialidad }}</td>
+              <td>
+                <span class="badge"
+                  [class.bg-warning]="item.estado_referencia === 'pendiente'"
+                  [class.bg-success]="item.estado_referencia === 'atendida'"
+                  [class.bg-danger]="item.estado_referencia === 'rechazada'"
+                  [class.text-dark]="item.estado_referencia === 'pendiente'">
+                  {{ item.estado_referencia }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
