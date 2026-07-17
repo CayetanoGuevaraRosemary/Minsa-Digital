@@ -15,7 +15,19 @@ export class Medicamento {
     return this.http.get<MedicamentoResponse[]>(this.apiURL);
   }
 
+  obtener(id: number): Observable<MedicamentoResponse> {
+    return this.http.get<MedicamentoResponse>(`${this.apiURL}/${id}`);
+  }
+
   guardar(medicamento: MedicamentoResponse): Observable<any> {
     return this.http.post(`${this.apiURL}/guardar`, medicamento);
+  }
+
+  actualizar(id: number, medicamento: MedicamentoResponse): Observable<any> {
+    return this.http.put(`${this.apiURL}/actualizar/${id}`, medicamento);
+  }
+
+  eliminar(id: number): Observable<any> {
+    return this.http.delete(`${this.apiURL}/eliminar/${id}`);
   }
 }

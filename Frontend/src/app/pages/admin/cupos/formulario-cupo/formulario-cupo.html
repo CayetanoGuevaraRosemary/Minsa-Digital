@@ -1,1 +1,84 @@
-<p>formulario-cupo works!</p>
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header" style="background-color: #eaf4fb;">
+          <h4 class="fw-bold mb-0" style="color: #1a2b3c;">{{ esEdicion ? 'Editar Cupo' : 'Nuevo Cupo' }}</h4>
+        </div>
+        <div class="card-body">
+
+          <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
+
+          <form #cupoForm="ngForm" (ngSubmit)="guardar()">
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Médico</label>
+                <select class="form-select" name="id_medico"
+                        [(ngModel)]="cupo().id_medico" required>
+                  <option value="0" disabled>Seleccione un médico</option>
+                  <option *ngFor="let m of medicos" [value]="m.id_medico">
+                    {{ m.nombres }} {{ m.apellidos }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Establecimiento</label>
+                <select class="form-select" name="id_establecimiento"
+                        [(ngModel)]="cupo().id_establecimiento" required>
+                  <option value="0" disabled>Seleccione un establecimiento</option>
+                  <option *ngFor="let e of establecimientos" [value]="e.id_establecimiento">
+                    {{ e.nombre }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Fecha</label>
+                <input type="date" class="form-control" name="fecha"
+                       [(ngModel)]="cupo().fecha" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Hora</label>
+                <input type="time" class="form-control" name="hora"
+                       [(ngModel)]="cupo().hora" required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-semibold">Slots Totales</label>
+                <input type="number" class="form-control" name="slots_totales"
+                       [(ngModel)]="cupo().slots_totales" min="1" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-semibold">Slots Disponibles</label>
+                <input type="number" class="form-control" name="slots_disponibles"
+                       [(ngModel)]="cupo().slots_disponibles" min="0" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-semibold">Tipo de Cita</label>
+                <select class="form-select" name="tipo_cita"
+                        [(ngModel)]="cupo().tipo_cita" required>
+                  <option value="" disabled>Seleccione tipo</option>
+                  <option value="presencial">Presencial</option>
+                  <option value="teleconsulta">Teleconsulta</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-3">
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+              <button type="submit" class="btn btn-info text-white fw-semibold" [disabled]="!cupoForm.valid">
+                Guardar
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

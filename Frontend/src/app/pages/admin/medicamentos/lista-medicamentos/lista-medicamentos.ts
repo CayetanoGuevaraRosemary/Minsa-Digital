@@ -35,7 +35,26 @@ export class ListaMedicamentos implements OnInit{
     });
   }
 
+  volver() {
+    this.router.navigate(['/admin/dashboard']);
+  }
+
   nuevoMedicamento() {
     this.router.navigate(['/admin/medicamentos/nuevo']);
+  }
+
+  editarMedicamento(id: number) {
+    this.router.navigate(['/admin/medicamentos/editar', id]);
+  }
+
+  eliminarMedicamento(id: number) {
+    if (!confirm('¿Seguro que deseas eliminar este medicamento?')) return;
+    this.service.eliminar(id).subscribe({
+      next: () => this.cargarMedicamentos(),
+      error: (err) => {
+        this.error = 'Error al eliminar el medicamento';
+        console.error(err);
+      }
+    });
   }
 }

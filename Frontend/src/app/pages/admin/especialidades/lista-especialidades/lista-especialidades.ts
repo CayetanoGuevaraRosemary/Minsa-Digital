@@ -10,7 +10,7 @@ import { Especialidad } from '../../../../services/especialidad';
   templateUrl: './lista-especialidades.html',
   styleUrl: './lista-especialidades.css',
 })
-export class ListaEspecialidades implements OnInit{
+export class ListaEspecialidades implements OnInit {
   listaEspecialidades = signal<EspecialidadResponse[]>([]);
   error: string | null = null;
 
@@ -35,7 +35,26 @@ export class ListaEspecialidades implements OnInit{
     });
   }
 
+  volver() {
+    this.router.navigate(['/admin/dashboard']);
+  }
+
   nuevaEspecialidad() {
     this.router.navigate(['/admin/especialidades/nuevo']);
+  }
+
+  editarEspecialidad(id: number) {
+    this.router.navigate(['/admin/especialidades/editar', id]);
+  }
+
+  eliminarEspecialidad(id: number) {
+    if (!confirm('¿Seguro que deseas eliminar esta especialidad?')) return;
+    this.service.eliminar(id).subscribe({
+      next: () => this.cargarEspecialidades(),
+      error: (err) => {
+        this.error = 'Error al eliminar la especialidad';
+        console.error(err);
+      }
+    });
   }
 }

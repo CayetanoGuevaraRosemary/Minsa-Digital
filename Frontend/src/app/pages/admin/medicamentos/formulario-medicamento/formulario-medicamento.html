@@ -3,12 +3,11 @@
     <div class="col-md-8">
       <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-          <h4 class="mb-0">Nuevo Medicamento</h4>
+          <h4 class="mb-0">{{ esEdicion ? 'Editar Medicamento' : 'Nuevo Medicamento' }}</h4>
         </div>
         <div class="card-body">
 
           <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
-
           <form #medicamentoForm="ngForm" (ngSubmit)="guardar()">
             <div class="row">
               <div class="col-md-12 mb-3">

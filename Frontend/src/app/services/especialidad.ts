@@ -18,4 +18,16 @@ export class Especialidad {
   guardar(especialidad: EspecialidadResponse): Observable<any> {
     return this.http.post(`${this.apiURL}/guardar`, especialidad);
   }
+
+  obtener(id: number): Observable<EspecialidadResponse> {
+    return this.http.get<EspecialidadResponse>(`${this.apiURL}/${id}`);
+  }
+
+  actualizar(id: number, especialidad: EspecialidadResponse): Observable<any> {
+    return this.http.put(`${this.apiURL}/actualizar/${id}`, especialidad);
+  }
+
+  eliminar(id: number): Observable<any> {
+    return this.http.delete(`${this.apiURL}/eliminar/${id}`);
+  }
 }

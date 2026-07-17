@@ -1,1 +1,124 @@
-<p>formulario-receta works!</p>
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <div class="card border-0 shadow-sm mb-4" [hidden]="modoDetalle">
+        <div class="card-header" style="background-color: #eaf4fb;">
+          <h4 class="fw-bold mb-0" style="color: #1a2b3c;">Nueva Receta</h4>
+        </div>
+        <div class="card-body">
+
+          <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
+
+          <form #recetaForm="ngForm" (ngSubmit)="guardarReceta()">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">ID Cita</label>
+                <input type="number" class="form-control" name="id_cita"
+                       [(ngModel)]="receta().id_cita" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">ID Paciente</label>
+                <input type="number" class="form-control" name="id_paciente"
+                       [(ngModel)]="receta().id_paciente" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Observaciones</label>
+              <textarea class="form-control" name="observaciones" rows="3"
+                        [(ngModel)]="receta().observaciones"></textarea>
+            </div>
+            <div class="d-flex justify-content-end gap-2 mt-3">
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+              <button type="submit" class="btn btn-info text-white fw-semibold" [disabled]="!recetaForm.valid">
+                Guardar Receta
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="card border-0 shadow-sm" [hidden]="!modoDetalle">
+        <div class="card-header" style="background-color: #eaf4fb;">
+          <h4 class="fw-bold mb-0" style="color: #1a2b3c;">Detalle de Receta</h4>
+        </div>
+        <div class="card-body">
+
+          <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
+
+          <form #detalleForm="ngForm" (ngSubmit)="agregarDetalle()">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Medicamento</label>
+                <select class="form-select" name="id_medicamento"
+                        [(ngModel)]="detalle().id_medicamento" required>
+                  <option value="0" disabled>Seleccione medicamento</option>
+                  <option *ngFor="let m of medicamentos" [value]="m.id_medicamento">
+                    {{ m.nombre }} — {{ m.presentacion }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Dosis</label>
+                <input type="text" class="form-control" name="dosis"
+                       [(ngModel)]="detalle().dosis" placeholder="Ej: 500mg" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-semibold">Frecuencia</label>
+                <input type="text" class="form-control" name="frecuencia"
+                       [(ngModel)]="detalle().frecuencia" placeholder="Ej: cada 8 horas" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-semibold">Duración (días)</label>
+                <input type="number" class="form-control" name="duracion_dias"
+                       [(ngModel)]="detalle().duracion_dias" min="1" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label class="form-label fw-semibold">Cantidad</label>
+                <input type="number" class="form-control" name="cantidad"
+                       [(ngModel)]="detalle().cantidad" min="1" required>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">Volver</button>
+              <button type="submit" class="btn btn-info text-white fw-semibold" [disabled]="!detalleForm.valid">
+                Agregar Medicamento
+              </button>
+            </div>
+          </form>
+
+          <hr class="my-4">
+
+          <h6 class="fw-bold mb-3" style="color: #1a2b3c;">Medicamentos agregados</h6>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead>
+                <tr style="background-color: #eaf4fb;">
+                  <th style="color: #1a2b3c;">Medicamento</th>
+                  <th style="color: #1a2b3c;">Dosis</th>
+                  <th style="color: #1a2b3c;">Frecuencia</th>
+                  <th style="color: #1a2b3c;">Días</th>
+                  <th style="color: #1a2b3c;">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let d of detalles">
+                  <td>{{ d.nombre }}</td>
+                  <td>{{ d.dosis }}</td>
+                  <td>{{ d.frecuencia }}</td>
+                  <td>{{ d.duracion_dias }}</td>
+                  <td>{{ d.cantidad }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
