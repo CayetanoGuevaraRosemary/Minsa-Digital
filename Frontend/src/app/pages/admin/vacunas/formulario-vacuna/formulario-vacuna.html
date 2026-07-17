@@ -1,0 +1,74 @@
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header" style="background-color: #eaf4fb;">
+          <h4 class="fw-bold mb-0" style="color: #1a2b3c;">Registrar Vacuna</h4>
+        </div>
+        <div class="card-body">
+
+          <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
+
+          <form #vacunaForm="ngForm" (ngSubmit)="guardar()">
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">ID Paciente</label>
+              <input type="number" class="form-control" name="id_paciente"
+                     [(ngModel)]="vacuna().id_paciente" required>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Nombre de la Vacuna</label>
+                <input type="text" class="form-control" name="nombre_vacuna"
+                       [(ngModel)]="vacuna().nombre_vacuna" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Tipo de Carné</label>
+                <select class="form-select" name="tipo_carne"
+                        [(ngModel)]="vacuna().tipo_carne" required>
+                  <option value="" disabled>Seleccione tipo</option>
+                  <option value="niño">Niño</option>
+                  <option value="adulto">Adulto</option>
+                  <option value="gestante">Gestante</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Dosis</label>
+                <input type="text" class="form-control" name="dosis"
+                       [(ngModel)]="vacuna().dosis" placeholder="Ej: 1ra dosis" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Fecha de Aplicación</label>
+                <input type="date" class="form-control" name="fecha_aplicacion"
+                       [(ngModel)]="vacuna().fecha_aplicacion" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Establecimiento</label>
+              <select class="form-select" name="id_establecimiento"
+                      [(ngModel)]="vacuna().id_establecimiento" required>
+                <option value="0" disabled>Seleccione establecimiento</option>
+                <option *ngFor="let e of establecimientos" [value]="e.id_establecimiento">
+                  {{ e.nombre }}
+                </option>
+              </select>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2 mt-3">
+              <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+              <button type="submit" class="btn btn-info text-white fw-semibold" [disabled]="!vacunaForm.valid">
+                Guardar
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
