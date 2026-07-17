@@ -1,1 +1,71 @@
-<p>lista-referencias works!</p>
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
+
+  <button class="btn btn-link text-decoration-none px-0 mb-3" (click)="volver()">
+    <i class="bi bi-arrow-left"></i> Volver al panel
+  </button>
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h3 class="fw-bold mb-0" style="color: #1a2b3c;">Referencias Médicas</h3>
+      <p class="text-muted mb-0">Gestión de referencias de Minsa Digital</p>
+    </div>
+    <button class="btn btn-info text-white fw-semibold" (click)="nuevaReferencia()">
+      Nueva Referencia
+    </button>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr style="background-color: #eaf4fb;">
+              <th class="ps-3" style="color: #1a2b3c;">ID</th>
+              <th style="color: #1a2b3c;">ID Paciente</th>
+              <th style="color: #1a2b3c;">Estab. Origen</th>
+              <th style="color: #1a2b3c;">Estab. Destino</th>
+              <th style="color: #1a2b3c;">Especialidad</th>
+              <th style="color: #1a2b3c;">Estado</th>
+              <th class="text-end pe-3" style="color: #1a2b3c;">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listaReferencias()">
+              <td class="ps-3">{{ item.id_referencia }}</td>
+              <td>{{ item.id_paciente }}</td>
+              <td>{{ item.id_establecimiento_origen }}</td>
+              <td>{{ item.id_establecimiento_destino }}</td>
+              <td>{{ item.id_especialidad }}</td>
+              <td>
+                <span class="badge"
+                  [class.bg-warning]="item.estado_referencia === 'pendiente'"
+                  [class.bg-success]="item.estado_referencia === 'atendida'"
+                  [class.bg-danger]="item.estado_referencia === 'rechazada'"
+                  [class.text-dark]="item.estado_referencia === 'pendiente'">
+                  {{ item.estado_referencia }}
+                </span>
+              </td>
+              <td class="text-end pe-3">
+                <button class="btn btn-sm btn-outline-success me-1"
+                  [hidden]="item.estado_referencia === 'atendida'"
+                  (click)="cambiarEstado(item.id_referencia, 'atendida')">
+                  <i class="bi bi-check-lg"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-warning me-1"
+                  [hidden]="item.estado_referencia === 'rechazada'"
+                  (click)="cambiarEstado(item.id_referencia, 'rechazada')">
+                  <i class="bi bi-x-lg"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger"
+                  (click)="eliminarReferencia(item.id_referencia)">
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

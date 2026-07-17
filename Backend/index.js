@@ -143,6 +143,28 @@ app.post("/especialidades/guardar", (req, res) => {
     })
 })
 
+app.get("/especialidades/:id", (req, res) => {
+    conexion.query("SELECT * FROM especialidades WHERE id_especialidad = ?", [req.params.id], (error, rpta) => {
+        if (error) return console.error(error.message)
+        res.json(rpta.length > 0 ? rpta[0] : "Especialidad no encontrada")
+    })
+})
+
+app.put("/especialidades/actualizar/:id", (req, res) => {
+    const esp = { nombre: req.body.nombre, descripcion: req.body.descripcion }
+    conexion.query("UPDATE especialidades SET ? WHERE id_especialidad = ?", [esp, req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Especialidad actualizada correctamente")
+    })
+})
+
+app.delete("/especialidades/eliminar/:id", (req, res) => {
+    conexion.query("DELETE FROM especialidades WHERE id_especialidad = ?", [req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Especialidad eliminada correctamente")
+    })
+})
+
 // ENDPOINTS ESTABLECIMIENTOS 
 app.get("/establecimientos", (req, res) => {
     const consulta = `SELECT es.*, u.departamento, u.provincia, u.distrito 
@@ -164,6 +186,33 @@ app.post("/establecimientos/guardar", (req, res) => {
     conexion.query("INSERT INTO establecimientos_salud SET ?", est, (error) => {
         if (error) return console.error(error.message)
         res.json("Establecimiento registrado correctamente")
+    })
+})
+
+app.get("/establecimientos/:id", (req, res) => {
+    conexion.query("SELECT * FROM establecimientos_salud WHERE id_establecimiento = ?", [req.params.id], (error, rpta) => {
+        if (error) return console.error(error.message)
+        res.json(rpta.length > 0 ? rpta[0] : "Establecimiento no encontrado")
+    })
+})
+
+app.put("/establecimientos/actualizar/:id", (req, res) => {
+    const est = {
+        nombre: req.body.nombre,
+        direccion: req.body.direccion,
+        id_ubicacion: req.body.id_ubicacion,
+        tipo: req.body.tipo
+    }
+    conexion.query("UPDATE establecimientos_salud SET ? WHERE id_establecimiento = ?", [est, req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Establecimiento actualizado correctamente")
+    })
+})
+
+app.delete("/establecimientos/eliminar/:id", (req, res) => {
+    conexion.query("DELETE FROM establecimientos_salud WHERE id_establecimiento = ?", [req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Establecimiento eliminado correctamente")
     })
 })
 
@@ -246,6 +295,36 @@ app.post("/cupos/guardar", (req, res) => {
     })
 })
 
+app.get("/cupos/:id", (req, res) => {
+    conexion.query("SELECT * FROM cupos_disponibles WHERE id_cupo = ?", [req.params.id], (error, rpta) => {
+        if (error) return console.error(error.message)
+        res.json(rpta.length > 0 ? rpta[0] : "Cupo no encontrado")
+    })
+})
+
+app.put("/cupos/actualizar/:id", (req, res) => {
+    const cupo = {
+        id_medico: req.body.id_medico,
+        id_establecimiento: req.body.id_establecimiento,
+        fecha: req.body.fecha,
+        hora: req.body.hora,
+        slots_totales: req.body.slots_totales,
+        slots_disponibles: req.body.slots_disponibles,
+        tipo_cita: req.body.tipo_cita
+    }
+    conexion.query("UPDATE cupos_disponibles SET ? WHERE id_cupo = ?", [cupo, req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Cupo actualizado correctamente")
+    })
+})
+
+app.delete("/cupos/eliminar/:id", (req, res) => {
+    conexion.query("DELETE FROM cupos_disponibles WHERE id_cupo = ?", [req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Cupo eliminado correctamente")
+    })
+})
+
 // ENDPOINTS RECETAS
 app.get("/recetas", (req, res) => {
     conexion.query("SELECT * FROM recetas", (error, rpta) => {
@@ -321,6 +400,32 @@ app.post("/medicamentos/guardar", (req, res) => {
     })
 })
 
+app.get("/medicamentos/:id", (req, res) => {
+    conexion.query("SELECT * FROM medicamentos WHERE id_medicamento = ?", [req.params.id], (error, rpta) => {
+        if (error) return console.error(error.message)
+        res.json(rpta.length > 0 ? rpta[0] : "No encontrado")
+    })
+})
+
+app.put("/medicamentos/actualizar/:id", (req, res) => {
+    const med = {
+        nombre: req.body.nombre,
+        presentacion: req.body.presentacion,
+        concentracion: req.body.concentracion
+    }
+    conexion.query("UPDATE medicamentos SET ? WHERE id_medicamento = ?", [med, req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Medicamento actualizado correctamente")
+    })
+})
+
+app.delete("/medicamentos/eliminar/:id", (req, res) => {
+    conexion.query("DELETE FROM medicamentos WHERE id_medicamento = ?", [req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Medicamento eliminado correctamente")
+    })
+})
+
 // ENDPOINTS REFERENCIAS 
 app.get("/referencias", (req, res) => {
     conexion.query("SELECT * FROM referencias", (error, rpta) => {
@@ -340,6 +445,38 @@ app.post("/referencias/guardar", (req, res) => {
     conexion.query("INSERT INTO referencias SET ?", ref, (error) => {
         if (error) return console.error(error.message)
         res.json("Referencia registrada correctamente")
+    })
+})
+
+app.get("/referencias/:id", (req, res) => {
+    conexion.query("SELECT * FROM referencias WHERE id_referencia = ?", [req.params.id], (error, rpta) => {
+        if (error) return console.error(error.message)
+        res.json(rpta.length > 0 ? rpta[0] : "Referencia no encontrada")
+    })
+})
+
+app.get("/referencias/paciente/:id", (req, res) => {
+    conexion.query("SELECT * FROM referencias WHERE id_paciente = ?", [req.params.id], (error, rpta) => {
+        if (error) return console.error(error.message)
+        res.json(rpta.length > 0 ? rpta : "No hay referencias para este paciente")
+    })
+})
+
+app.put("/referencias/estado/:id", (req, res) => {
+    conexion.query(
+        "UPDATE referencias SET estado_referencia=? WHERE id_referencia=?",
+        [req.body.estado_referencia, req.params.id],
+        (error) => {
+            if (error) return console.error(error.message)
+            res.json("Estado de referencia actualizado")
+        }
+    )
+})
+
+app.delete("/referencias/eliminar/:id", (req, res) => {
+    conexion.query("DELETE FROM referencias WHERE id_referencia = ?", [req.params.id], (error) => {
+        if (error) return console.error(error.message)
+        res.json("Referencia eliminada correctamente")
     })
 })
 
