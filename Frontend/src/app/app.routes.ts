@@ -13,7 +13,9 @@ import { ListaRecetas } from './pages/admin/recetas/lista-recetas/lista-recetas'
 import { ListaMedicamentos } from './pages/admin/medicamentos/lista-medicamentos/lista-medicamentos';
 import { FormularioMedicamento } from './pages/admin/medicamentos/formulario-medicamento/formulario-medicamento';
 import { ListaReferencias } from './pages/admin/referencias/lista-referencias/lista-referencias';
+import { FormularioReferencia } from './pages/admin/referencias/formulario-referencia/formulario-referencia';
 import { ListaVacunas } from './pages/admin/vacunas/lista-vacunas/lista-vacunas';
+import { FormularioVacuna } from './pages/admin/vacunas/formulario-vacuna/formulario-vacuna';
 import { ListaEstablecimientos } from './pages/admin/establecimientos/lista-establecimientos/lista-establecimientos';
 import { FormularioEstablecimiento } from './pages/admin/establecimientos/formulario-establecimiento/formulario-establecimiento';
 import { DashboardPaciente } from './pages/paciente/dashboard-paciente/dashboard-paciente';
@@ -24,6 +26,7 @@ import { MisVacunas } from './pages/paciente/mis-vacunas/mis-vacunas';
 import { MisReferencias } from './pages/paciente/mis-referencias/mis-referencias';
 import { ListaEspecialidades } from './pages/admin/especialidades/lista-especialidades/lista-especialidades';
 import { FormularioEspecialidad } from './pages/admin/especialidades/formulario-especialidad/formulario-especialidad';
+import { FormularioReceta } from './pages/admin/recetas/formulario-receta/formulario-receta';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -38,17 +41,26 @@ export const routes: Routes = [
   { path: 'admin/medicos/nuevo', component: FormularioMedico },
   { path: 'admin/medicos/editar/:id', component: FormularioMedico },
   { path: 'admin/citas', component: ListaCitas },
+  { path: 'admin/citas/nuevo', component: ListaCitas },
   { path: 'admin/cupos', component: ListaCupos },
   { path: 'admin/cupos/nuevo', component: FormularioCupo },
+  { path: 'admin/cupos/editar/:id', component: FormularioCupo },
   { path: 'admin/recetas', component: ListaRecetas },
+  { path: 'admin/recetas/nuevo', component: FormularioReceta },
+  { path: 'admin/recetas/detalle/:id', component: FormularioReceta },
   { path: 'admin/medicamentos', component: ListaMedicamentos },
   { path: 'admin/medicamentos/nuevo', component: FormularioMedicamento },
+  { path: 'admin/medicamentos/editar/:id', component: FormularioMedicamento },
   { path: 'admin/referencias', component: ListaReferencias },
+  { path: 'admin/referencias/nuevo', component: FormularioReferencia },
   { path: 'admin/vacunas', component: ListaVacunas },
+  { path: 'admin/vacunas/nuevo', component: FormularioVacuna },
   { path: 'admin/establecimientos', component: ListaEstablecimientos },
   { path: 'admin/establecimientos/nuevo', component: FormularioEstablecimiento },
+  { path: 'admin/establecimientos/editar/:id', component: FormularioEstablecimiento },
   { path: 'admin/especialidades', component: ListaEspecialidades },
   { path: 'admin/especialidades/nuevo', component: FormularioEspecialidad },
+  { path: 'admin/especialidades/editar/:id', component: FormularioEspecialidad },
 
   // PACIENTE
   { path: 'paciente/dashboard', component: DashboardPaciente },
