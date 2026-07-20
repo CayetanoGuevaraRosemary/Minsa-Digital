@@ -59,4 +59,10 @@ export class ListaCitas implements OnInit {
       }
     });
   }
+
+  agregarReceta(item: CitaResponse) {
+    this.router.navigate(['/admin/recetas/nuevo'], {
+      queryParams: { id_cita: item.id_cita, id_paciente: item.id_paciente }
+    });
+  }
 }

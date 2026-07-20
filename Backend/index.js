@@ -438,9 +438,12 @@ app.post("/recetas/guardar", (req, res) => {
     estado_dispensacion: req.body.estado_dispensacion || "pendiente",
     observaciones: req.body.observaciones,
   };
-  conexion.query("INSERT INTO recetas SET ?", receta, (error) => {
+  conexion.query("INSERT INTO recetas SET ?", receta, (error, resultado) => {
     if (error) return console.error(error.message);
-    res.json("Receta registrada correctamente");
+    res.json({
+      mensaje: "Receta registrada correctamente",
+      id_receta: resultado.insertId,
+    });
   });
 });
 

@@ -61,12 +61,18 @@ export class FormularioReceta implements OnInit {
         error: (err) => console.error(err)
       });
     }
+
+    const idCitaQuery = this.route.snapshot.queryParamMap.get('id_cita');
+    const idPacienteQuery = this.route.snapshot.queryParamMap.get('id_paciente');
+    if (idCitaQuery && idPacienteQuery) {
+      this.receta.set({ ...this.receta(), id_cita: Number(idCitaQuery), id_paciente: Number(idPacienteQuery) });
+    }
   }
 
   guardarReceta() {
     this.service.guardar(this.receta()).subscribe({
-      next: (resp) => {
-        this.router.navigate(['/admin/recetas']);
+      next: (resp: any) => {
+        this.router.navigate(['/admin/recetas/detalle', resp.id_receta]);
       },
       error: (err) => {
         this.error = err.error?.message || 'Error al guardar la receta';
