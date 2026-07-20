@@ -10,20 +10,20 @@
     </div>
   </div>
 
-  <div class="card border-0 shadow-sm">
+  <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
     <div class="card-body p-0">
       <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead>
-            <tr style="background-color: #eaf4fb">
-              <th class="ps-3" style="color: #1a2b3c">ID</th>
-              <th style="color: #1a2b3c">Paciente</th>
-              <th style="color: #1a2b3c">Médico</th>
-              <th style="color: #1a2b3c">Fecha</th>
-              <th style="color: #1a2b3c">Hora</th>
-              <th style="color: #1a2b3c">Tipo</th>
-              <th style="color: #1a2b3c">Estado</th>
-              <th class="text-end pe-3" style="color: #1a2b3c">Acciones</th>
+        <table class="table table-hover table-striped align-middle mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th class="ps-3 text-white text-uppercase small fw-semibold">ID</th>
+              <th class="text-white text-uppercase small fw-semibold">Paciente</th>
+              <th class="text-white text-uppercase small fw-semibold">Médico</th>
+              <th class="text-white text-uppercase small fw-semibold">Fecha</th>
+              <th class="text-white text-uppercase small fw-semibold">Hora</th>
+              <th class="text-white text-uppercase small fw-semibold">Tipo</th>
+              <th class="text-white text-uppercase small fw-semibold">Estado</th>
+              <th class="text-end pe-3 text-white text-uppercase small fw-semibold">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -36,12 +36,12 @@
               <td>{{ item.tipo_cita }}</td>
               <td>
                 <span
-                  class="badge"
+                  class="badge rounded-pill"
                   [class.bg-warning]="item.estado_cita === 'pendiente'"
                   [class.bg-success]="item.estado_cita === 'confirmada'"
-                  [class.bg-danger]="item.estado_cita === 'cancelada'"
                   [class.bg-info]="item.estado_cita === 'atendida'"
-                  [class.text-dark]="item.estado_cita === 'pendiente'"
+                  [class.bg-danger]="item.estado_cita === 'cancelada'"
+                  [class.text-dark]="item.estado_cita === 'pendiente' || item.estado_cita === 'atendida'"
                 >
                   {{ item.estado_cita }}
                 </span>
@@ -72,11 +72,13 @@
                 </button>
                 <button
                   class="btn btn-sm btn-outline-warning me-1"
-                  [hidden]="item.estado_cita === 'cancelada' || item.estado_cita === 'atendida'"
+                  [hidden]="item.estado_cita === 'cancelada'"
                   (click)="cambiarEstado(item.id_cita, 'cancelada')"
-                  title="Cancelar cita"
                 >
                   <i class="bi bi-x-lg"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="eliminarCita(item.id_cita)">
+                  <i class="bi bi-trash-fill"></i>
                 </button>
               </td>
             </tr>

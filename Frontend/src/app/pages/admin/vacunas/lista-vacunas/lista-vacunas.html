@@ -1,32 +1,31 @@
-<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
-
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh">
   <button class="btn btn-link text-decoration-none px-0 mb-3" (click)="volver()">
     <i class="bi bi-arrow-left"></i> Volver al panel
   </button>
 
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h3 class="fw-bold mb-0" style="color: #1a2b3c;">Registro de Vacunas</h3>
+      <h3 class="fw-bold mb-0" style="color: #1a2b3c">Registro de Vacunas</h3>
       <p class="text-muted mb-0">Gestión de vacunas de Minsa Digital</p>
     </div>
     <button class="btn btn-info text-white fw-semibold" (click)="nuevaVacuna()">
-      Registrar Vacuna
+      <i class="bi bi-plus-lg me-1"></i>Registrar Vacuna
     </button>
   </div>
 
-  <div class="card border-0 shadow-sm">
+  <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
     <div class="card-body p-0">
       <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead>
-            <tr style="background-color: #eaf4fb;">
-              <th class="ps-3" style="color: #1a2b3c;">ID</th>
-              <th style="color: #1a2b3c;">ID Paciente</th>
-              <th style="color: #1a2b3c;">Vacuna</th>
-              <th style="color: #1a2b3c;">Tipo Carné</th>
-              <th style="color: #1a2b3c;">Dosis</th>
-              <th style="color: #1a2b3c;">Fecha Aplicación</th>
-              <th style="color: #1a2b3c;">ID Establecimiento</th>
+        <table class="table table-hover table-striped align-middle mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th class="ps-3 text-white text-uppercase small fw-semibold">ID</th>
+              <th class="text-white text-uppercase small fw-semibold">ID Paciente</th>
+              <th class="text-white text-uppercase small fw-semibold">Vacuna</th>
+              <th class="text-white text-uppercase small fw-semibold">Tipo Carné</th>
+              <th class="text-white text-uppercase small fw-semibold">Dosis</th>
+              <th class="text-white text-uppercase small fw-semibold">Fecha Aplicación</th>
+              <th class="text-white text-uppercase small fw-semibold">ID Establecimiento</th>
             </tr>
           </thead>
           <tbody>
@@ -36,7 +35,7 @@
               <td>{{ item.nombre_vacuna }}</td>
               <td>{{ item.tipo_carne }}</td>
               <td>{{ item.dosis }}</td>
-              <td>{{ item.fecha_aplicacion | date:'dd/MM/yyyy' }}</td>
+              <td>{{ item.fecha_aplicacion | date: 'dd/MM/yyyy' }}</td>
               <td>{{ item.id_establecimiento }}</td>
             </tr>
           </tbody>
@@ -44,5 +43,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -1,31 +1,30 @@
-<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
-
+<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh">
   <button class="btn btn-link text-decoration-none px-0 mb-3" (click)="volver()">
     <i class="bi bi-arrow-left"></i> Volver al panel
   </button>
 
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h3 class="fw-bold mb-0" style="color: #1a2b3c;">Recetas Médicas</h3>
+      <h3 class="fw-bold mb-0" style="color: #1a2b3c">Recetas Médicas</h3>
       <p class="text-muted mb-0">Gestión de recetas de Minsa Digital</p>
     </div>
     <button class="btn btn-info text-white fw-semibold" (click)="nuevaReceta()">
-      Nueva Receta
+      <i class="bi bi-plus-lg me-1"></i>Nueva Receta
     </button>
   </div>
 
-  <div class="card border-0 shadow-sm">
+  <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
     <div class="card-body p-0">
       <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead>
-            <tr style="background-color: #eaf4fb;">
-              <th class="ps-3" style="color: #1a2b3c;">ID</th>
-              <th style="color: #1a2b3c;">ID Cita</th>
-              <th style="color: #1a2b3c;">ID Paciente</th>
-              <th style="color: #1a2b3c;">Estado</th>
-              <th style="color: #1a2b3c;">Observaciones</th>
-              <th class="text-end pe-3" style="color: #1a2b3c;">Acciones</th>
+        <table class="table table-hover table-striped align-middle mb-0">
+          <thead class="table-dark">
+            <tr>
+              <th class="ps-3 text-white text-uppercase small fw-semibold">ID</th>
+              <th class="text-white text-uppercase small fw-semibold">ID Cita</th>
+              <th class="text-white text-uppercase small fw-semibold">ID Paciente</th>
+              <th class="text-white text-uppercase small fw-semibold">Estado</th>
+              <th class="text-white text-uppercase small fw-semibold">Observaciones</th>
+              <th class="text-end pe-3 text-white text-uppercase small fw-semibold">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -34,10 +33,12 @@
               <td>{{ item.id_cita }}</td>
               <td>{{ item.id_paciente }}</td>
               <td>
-                <span class="badge"
+                <span
+                  class="badge rounded-pill"
                   [class.bg-warning]="item.estado_dispensacion === 'pendiente'"
                   [class.bg-success]="item.estado_dispensacion === 'dispensada'"
-                  [class.text-dark]="item.estado_dispensacion === 'pendiente'">
+                  [class.text-dark]="item.estado_dispensacion === 'pendiente'"
+                >
                   {{ item.estado_dispensacion }}
                 </span>
               </td>
@@ -53,5 +54,4 @@
       </div>
     </div>
   </div>
-
 </div>

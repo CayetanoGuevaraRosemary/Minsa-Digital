@@ -455,7 +455,7 @@ app.get("/recetas/detalle/:id_receta", (req, res) => {
                       WHERE rd.id_receta = ?`;
   conexion.query(consulta, [req.params.id_receta], (error, rpta) => {
     if (error) return console.error(error.message);
-    res.json(rpta.length > 0 ? rpta : "Sin detalle");
+    res.json(rpta);
   });
 });
 
@@ -478,7 +478,7 @@ app.post("/recetas/detalle/guardar", (req, res) => {
 app.get("/medicamentos", (req, res) => {
   conexion.query("SELECT * FROM medicamentos", (error, rpta) => {
     if (error) return console.error(error.message);
-    res.json(rpta.length > 0 ? rpta : "No hay registros");
+    res.json(rpta);
   });
 });
 

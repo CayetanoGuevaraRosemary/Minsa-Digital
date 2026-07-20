@@ -38,8 +38,9 @@
                     class="badge rounded-pill"
                     [class.bg-warning]="item.estado_cita === 'pendiente'"
                     [class.bg-success]="item.estado_cita === 'confirmada'"
+                    [class.bg-info]="item.estado_cita === 'atendida'"
                     [class.bg-danger]="item.estado_cita === 'cancelada'"
-                    [class.text-dark]="item.estado_cita === 'pendiente'"
+                    [class.text-dark]="item.estado_cita === 'pendiente' || item.estado_cita === 'atendida'"
                   >
                     {{ item.estado_cita }}
                   </span>
@@ -63,6 +64,7 @@
         <span><span class="badge bg-warning text-dark me-1">pendiente</span> Cita por atender</span>
         <span><span class="badge bg-success me-1">confirmada</span> Cita confirmada</span>
         <span><span class="badge bg-danger me-1">cancelada</span> Cita cancelada</span>
+        <span><span class="badge bg-info text-dark me-1">atendida</span> Cita atendida</span>
       </div>
     </div>
   </div>

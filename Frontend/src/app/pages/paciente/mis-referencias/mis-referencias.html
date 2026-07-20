@@ -1,6 +1,5 @@
-<div style="min-height: 100vh; background-color: #f8f9fa; display: flex; flex-direction: column;">
-
-  <nav class="navbar" style="background-color: #0070c0;">
+<div style="min-height: 100vh; background-color: #f8f9fa; display: flex; flex-direction: column">
+  <nav class="navbar" style="background-color: #0070c0">
     <div class="container-fluid px-4">
       <button class="btn text-white" (click)="volver()">
         <i class="bi bi-arrow-left me-1"></i> Volver
@@ -12,24 +11,30 @@
   </nav>
 
   <div class="container-fluid px-4 py-4">
-    <h4 class="fw-bold mb-1" style="color: #1a2b3c;">Consulta tu Estado de Referencia</h4>
+    <h4 class="fw-bold mb-1" style="color: #1a2b3c">Consulta tu Estado de Referencia</h4>
     <p class="text-muted small mb-4">Revisa el avance de tus referencias</p>
 
     <div class="row g-3">
       <div class="col-md-6" *ngFor="let item of misReferencias()">
-        <div class="card border-0 shadow-sm" style="border-left: 4px solid #0070c0 !important;">
+        <div class="card border-0 shadow-sm" style="border-left: 4px solid #0070c0 !important">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-start">
               <div>
-                <h6 class="fw-bold mb-1" style="color: #1a2b3c;">Referencia #{{ item.id_referencia }}</h6>
+                <h6 class="fw-bold mb-1" style="color: #1a2b3c">
+                  Referencia #{{ item.id_referencia }}
+                </h6>
                 <p class="text-muted small mb-1">Especialidad: {{ item.especialidad }}</p>
-<p class="text-muted small mb-0">Te derivan a: {{ item.establecimiento_destino }}</p>
+                <p class="text-muted small mb-0">
+                  Te derivan a: {{ item.establecimiento_destino }}
+                </p>
               </div>
-              <span class="badge rounded-pill"
+              <span
+                class="badge rounded-pill"
                 [class.bg-warning]="item.estado_referencia === 'pendiente'"
-                [class.bg-success]="item.estado_referencia === 'atendida'"
+                [class.bg-success]="item.estado_referencia === 'aceptada'"
                 [class.bg-danger]="item.estado_referencia === 'rechazada'"
-                [class.text-dark]="item.estado_referencia === 'pendiente'">
+                [class.text-dark]="item.estado_referencia === 'pendiente'"
+              >
                 {{ item.estado_referencia }}
               </span>
             </div>
@@ -45,17 +50,21 @@
     </div>
 
     <div class="card border-0 shadow-sm mt-4 p-3">
-      <h6 class="fw-bold mb-3" style="color: #1a2b3c;">Leyenda</h6>
+      <h6 class="fw-bold mb-3" style="color: #1a2b3c">Leyenda</h6>
       <div class="d-flex flex-wrap gap-3 small">
-        <span><span class="badge bg-warning text-dark me-1">pendiente</span>Pendiente de aprobación</span>
-        <span><span class="badge bg-success me-1">atendida</span>Referencia atendida</span>
+        <span
+          ><span class="badge bg-warning text-dark me-1">pendiente</span>Pendiente de
+          aprobación</span
+        >
+        <span><span class="badge bg-success me-1">aceptada</span>Referencia aceptada</span>
         <span><span class="badge bg-danger me-1">rechazada</span>Referencia rechazada</span>
       </div>
     </div>
   </div>
 
-  <div class="mt-auto py-3 px-4" style="background-color: #1a2b3c;">
-    <p class="text-white-50 small mb-0 text-center">Copyright © 2025. Ministerio de Salud del Perú.</p>
+  <div class="mt-auto py-3 px-4" style="background-color: #1a2b3c">
+    <p class="text-white-50 small mb-0 text-center">
+      Copyright © 2025. Ministerio de Salud del Perú.
+    </p>
   </div>
-
 </div>
