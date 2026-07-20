@@ -1,47 +1,76 @@
-<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card border-0 shadow-sm">
-        <div class="card-header" style="background-color: #eaf4fb;">
-          <h4 class="fw-bold mb-0" style="color: #1a2b3c;">Reservar Cita Médica</h4>
-        </div>
-        <div class="card-body">
+<div style="min-height: 100vh; background-color: #f8f9fa; display: flex; flex-direction: column">
+  <nav class="navbar" style="background-color: #0070c0">
+    <div class="container-fluid px-4">
+      <button class="btn text-white" (click)="cancelar()">
+        <i class="bi bi-arrow-left me-1"></i> Volver
+      </button>
+      <span class="navbar-brand fw-bold text-white fs-5 mx-auto">
+        <i class="bi bi-heart-pulse-fill me-2"></i>Minsa Digital
+      </span>
+    </div>
+  </nav>
 
-          <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
+  <div class="container-fluid px-4 py-4">
+    <h4 class="fw-bold mb-1" style="color: #1a2b3c">Reservar Cita Médica</h4>
+    <p class="text-muted small mb-4">Selecciona un cupo disponible para tu cita</p>
 
-          <form #reservarForm="ngForm" (ngSubmit)="guardar()">
+    <div class="row justify-content-center">
+      <div class="col-md-7">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="alert alert-danger" [hidden]="!error">{{ error }}</div>
 
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Cupo disponible</label>
-              <select class="form-select" name="id_cupo"
-                      [(ngModel)]="cita().id_cupo" required>
-                <option value="0" disabled>Seleccione un cupo</option>
-                <option *ngFor="let c of cupos" [value]="c.id_cupo">
-                  Médico {{ c.id_medico }} — {{ c.fecha | date:'dd/MM/yyyy' }} {{ c.hora }} ({{ c.tipo_cita }})
-                </option>
-              </select>
-            </div>
+            <form #reservarForm="ngForm" (ngSubmit)="guardar()">
+              <div class="mb-4">
+                <label class="form-label fw-semibold" style="color: #1a2b3c">Cupo disponible</label>
+                <select
+                  class="form-select form-select-lg"
+                  name="id_cupo"
+                  [(ngModel)]="cita().id_cupo"
+                  (change)="onCupoSeleccionado()"
+                  required
+                >
+                  <option value="0" disabled>Seleccione un cupo disponible</option>
+                  <option *ngFor="let c of cupos" [value]="c.id_cupo">
+                    Dr(a). {{ c.medico }} - {{ c.especialidad }} — {{ c.establecimiento }} —
+                    {{ c.fecha | date: 'dd/MM/yyyy' }} {{ c.hora }} ({{ c.tipo_cita }})
+                  </option>
+                </select>
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label fw-semibold">Tipo de cita</label>
-              <select class="form-select" name="tipo_cita"
-                      [(ngModel)]="cita().tipo_cita" required>
-                <option value="" disabled>Seleccione tipo</option>
-                <option value="presencial">Presencial</option>
-                <option value="teleconsulta">Teleconsulta</option>
-              </select>
-            </div>
+              <div class="mb-4">
+                <label class="form-label fw-semibold" style="color: #1a2b3c">Tipo de cita</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg text-capitalize"
+                  [value]="cita().tipo_cita || 'Selecciona un cupo primero'"
+                  readonly
+                />
+              </div>
 
-            <div class="d-flex justify-content-end gap-2 mt-3">
-              <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
-              <button type="submit" class="btn btn-info text-white fw-semibold" [disabled]="!reservarForm.valid">
-                Confirmar Reserva
-              </button>
-            </div>
-
-          </form>
+              <div class="d-grid gap-2">
+                <button
+                  type="submit"
+                  class="btn btn-lg text-white fw-semibold"
+                  style="background-color: #0070c0"
+                  [disabled]="!reservarForm.valid"
+                >
+                  <i class="bi bi-calendar-check me-2"></i>Confirmar Reserva
+                </button>
+                <button type="button" class="btn btn-outline-secondary" (click)="cancelar()">
+                  Cancelar y volver
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="mt-auto py-3 px-4" style="background-color: #1a2b3c">
+    <p class="text-white-50 small mb-0 text-center">
+      Copyright © 2025. Ministerio de Salud del Perú.
+    </p>
   </div>
 </div>

@@ -7,4 +7,7 @@ export interface CupoResponse {
   slots_totales: number;
   slots_disponibles: number;
   tipo_cita: string;
+  medico?: string;
+  especialidad?: string;
+  establecimiento?: string;
 }

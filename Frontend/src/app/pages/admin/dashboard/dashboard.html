@@ -1,115 +1,59 @@
-<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h3 class="fw-bold mb-0" style="color: #1a2b3c">Hola, {{ nombreAdmin }}</h3>
-      <p class="text-muted mb-0">Panel de administración de Minsa Digital</p>
+<div style="min-height: 100vh; background-color: #f8f9fa; display: flex; flex-direction: column;">
+
+  <nav class="navbar" style="background-color: #0070c0;">
+    <div class="container-fluid px-4">
+      <span class="navbar-brand fw-bold text-white fs-5">
+        <i class="bi bi-heart-pulse-fill me-2"></i>Minsa Digital
+      </span>
+      <div class="d-flex align-items-center gap-3 ms-auto">
+        <span class="text-white fw-semibold small">{{ nombreAdmin }}</span>
+        <button class="btn btn-outline-light btn-sm" (click)="cerrarSesion()">Cerrar Sesión</button>
+      </div>
     </div>
-    <button class="btn btn-outline-secondary" (click)="cerrarSesion()">Cerrar sesión</button>
+  </nav>
+
+  <div style="background: linear-gradient(135deg, #0070c0 60%, #00a8e8 100%); padding: 40px 32px 48px;">
+    <div class="container-fluid px-4">
+      <h4 class="text-white fw-bold mb-1">Panel de Administración</h4>
+      <p class="text-white opacity-75 mb-0">Gestiona todos los módulos del sistema de salud</p>
+    </div>
   </div>
 
-  <div class="row g-3">
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/pacientes')">
-        <div class="card-body">
-          <i class="bi bi-person-heart fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c">Pacientes</h5>
-          <p class="text-muted mb-0">Registro y listado de pacientes</p>
+  <div class="container-fluid px-4 py-4">
+    <h5 class="fw-bold mb-1" style="color: #1a2b3c;">Módulos del sistema</h5>
+    <p class="text-muted small mb-4">Selecciona el módulo que deseas gestionar</p>
+
+    <div class="row g-3">
+
+      <div class="col-md-4" *ngFor="let modulo of modulos">
+        <div class="card border-0 shadow-sm h-100" role="button" (click)="irA(modulo.ruta)"
+          style="border-bottom: 3px solid #0070c0 !important; cursor: pointer;">
+          <div class="card-body d-flex align-items-center gap-3">
+            <i class="bi fs-3" [class]="modulo.icono" style="color: #0070c0;"></i>
+            <div>
+              <p class="fw-semibold mb-0" style="color: #0070c0;">{{ modulo.nombre }}</p>
+              <small class="text-muted">{{ modulo.descripcion }}</small>
+            </div>
+            <i class="bi bi-chevron-right ms-auto text-muted"></i>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-4">
-      <div
-        class="card border-0 shadow-sm h-100"
-        role="button"
-        (click)="irA('/admin/especialidades')"
-      >
-        <div class="card-body">
-          <i class="bi bi-journal-medical fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c">Especialidades</h5>
-          <p class="text-muted mb-0">Registro y listado de especialidades</p>
-        </div>
+    </div>
+  </div>
+
+  <div class="mt-auto py-4 px-4" style="background-color: #1a2b3c;">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div>
+        <p class="text-white-50 small mb-0">Copyright © 2025. Desarrollado por la Oficina General de Tecnologías de la Información del Ministerio de Salud.</p>
+        <p class="text-white-50 small mb-0">Todos los derechos reservados.</p>
       </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/cupos')">
-        <div class="card-body">
-          <i class="bi bi-calendar-check fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c;">Cupos</h5>
-          <p class="text-muted mb-0">Gestión de cupos disponibles</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/citas')">
-        <div class="card-body">
-          <i class="bi bi-clipboard2-check fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c;">Citas</h5>
-          <p class="text-muted mb-0">Gestión de citas médicas</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/establecimientos')">
-        <div class="card-body">
-          <i class="bi bi-hospital fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c;">Establecimientos</h5>
-          <p class="text-muted mb-0">Registro y listado de establecimientos</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/medicamentos')">
-        <div class="card-body">
-          <i class="bi bi-capsule fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c">Medicamentos</h5>
-          <p class="text-muted mb-0">Registro y listado de medicamentos</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/recetas')">
-        <div class="card-body">
-          <i class="bi bi-clipboard2-pulse fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c;">Recetas</h5>
-          <p class="text-muted mb-0">Gestión de recetas médicas</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/referencias')">
-        <div class="card-body">
-          <i class="bi bi-arrow-left-right fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c;">Referencias</h5>
-          <p class="text-muted mb-0">Gestión de referencias médicas</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/vacunas')">
-        <div class="card-body">
-          <i class="bi bi-shield-plus fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c;">Vacunas</h5>
-          <p class="text-muted mb-0">Registro de vacunas aplicadas</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card border-0 shadow-sm h-100" role="button" (click)="irA('/admin/medicos')">
-        <div class="card-body">
-          <i class="bi bi-person-badge fs-2 text-info"></i>
-          <h5 class="fw-bold mt-2" style="color: #1a2b3c;">Médicos</h5>
-          <p class="text-muted mb-0">Registro y listado de médicos</p>
-        </div>
+      <div class="text-end">
+        <p class="text-white fw-semibold mb-1">Mesa de ayuda - Canales de atención</p>
+        <p class="text-white-50 small mb-0"><i class="bi bi-envelope me-1"></i>soporte_aplicativos@minsa.gob.pe</p>
+        <p class="text-white-50 small mb-0"><i class="bi bi-telephone me-1"></i>(01) 315 7540</p>
       </div>
     </div>
   </div>
+
 </div>

@@ -4,6 +4,7 @@ export interface RecetaResponse {
   id_paciente: number;
   estado_dispensacion: string;
   observaciones: string;
+  fecha_emision?: string;
 }
 
 export interface RecetaDetalleResponse {

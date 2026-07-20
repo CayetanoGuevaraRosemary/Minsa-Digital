@@ -1,39 +1,49 @@
-<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
+<div style="min-height: 100vh; background-color: #f8f9fa; display: flex; flex-direction: column;">
 
-  <button class="btn btn-link text-decoration-none px-0 mb-3" (click)="volver()">
-    <i class="bi bi-arrow-left"></i> Volver al inicio
-  </button>
+  <nav class="navbar" style="background-color: #0070c0;">
+    <div class="container-fluid px-4">
+      <button class="btn text-white" (click)="volver()">
+        <i class="bi bi-arrow-left me-1"></i> Volver
+      </button>
+      <span class="navbar-brand fw-bold text-white fs-5 mx-auto">
+        <i class="bi bi-heart-pulse-fill me-2"></i>Minsa Digital
+      </span>
+    </div>
+  </nav>
 
-  <div class="mb-4">
-    <h3 class="fw-bold mb-0" style="color: #1a2b3c;">Mis Vacunas</h3>
-    <p class="text-muted mb-0">Historial de tu carné de vacunación</p>
-  </div>
+  <div class="container-fluid px-4 py-4">
+    <h4 class="fw-bold mb-1" style="color: #1a2b3c;">Carné de Vacunación</h4>
+    <p class="text-muted small mb-4">Historial de tus vacunas registradas</p>
 
-  <div class="card border-0 shadow-sm">
-    <div class="card-body p-0">
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead>
-            <tr style="background-color: #eaf4fb;">
-              <th class="ps-3" style="color: #1a2b3c;">ID</th>
-              <th style="color: #1a2b3c;">Vacuna</th>
-              <th style="color: #1a2b3c;">Tipo Carné</th>
-              <th style="color: #1a2b3c;">Dosis</th>
-              <th style="color: #1a2b3c;">Fecha Aplicación</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of misVacunas()">
-              <td class="ps-3">{{ item.id_vacuna }}</td>
-              <td>{{ item.nombre_vacuna }}</td>
-              <td>{{ item.tipo_carne }}</td>
-              <td>{{ item.dosis }}</td>
-              <td>{{ item.fecha_aplicacion | date:'dd/MM/yyyy' }}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="row g-3">
+      <div class="col-md-6" *ngFor="let item of misVacunas()">
+        <div class="card border-0 shadow-sm" style="border-left: 4px solid #0070c0 !important;">
+          <div class="card-body">
+            <div class="d-flex align-items-start gap-3">
+              <i class="bi bi-shield-check fs-3" style="color: #0070c0;"></i>
+              <div class="flex-grow-1">
+                <h6 class="fw-bold mb-1" style="color: #1a2b3c;">{{ item.nombre_vacuna }}</h6>
+                <p class="text-muted small mb-1">Dosis: {{ item.dosis }}</p>
+                <p class="text-muted small mb-1">Tipo: {{ item.tipo_carne }}</p>
+                <p class="text-muted small mb-0">
+                  <i class="bi bi-calendar3 me-1"></i>
+                  Fecha: {{ item.fecha_aplicacion | date:'dd/MM/yyyy' }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="text-center py-5" [hidden]="misVacunas().length > 0">
+      <i class="bi bi-shield-x fs-1 text-muted"></i>
+      <p class="text-muted mt-2 mb-0">No tienes vacunas registradas</p>
+    </div>
+  </div>
+
+  <div class="mt-auto py-3 px-4" style="background-color: #1a2b3c;">
+    <p class="text-white-50 small mb-0 text-center">Copyright © 2025. Ministerio de Salud del Perú.</p>
   </div>
 
 </div>

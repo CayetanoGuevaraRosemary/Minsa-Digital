@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CitaResponse } from '../../../model/cita-response';
 import { Cita } from '../../../services/cita';
@@ -10,7 +10,7 @@ import { Sesion } from '../../../services/sesion';
 
 @Component({
   selector: 'app-reservar-cita',
-  imports: [FormsModule, DatePipe],
+  imports: [FormsModule, CommonModule],
   templateUrl: './reservar-cita.html',
   styleUrl: './reservar-cita.css',
 })
@@ -59,5 +59,12 @@ export class ReservarCita implements OnInit {
 
   cancelar() {
     this.router.navigate(['/paciente/mis-citas']);
+  }
+
+  onCupoSeleccionado() {
+    const cupoSeleccionado = this.cupos.find(c => c.id_cupo === Number(this.cita().id_cupo));
+    if (cupoSeleccionado) {
+      this.cita.set({ ...this.cita(), tipo_cita: cupoSeleccionado.tipo_cita });
+    }
   }
 }

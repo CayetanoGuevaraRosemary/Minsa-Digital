@@ -1,48 +1,75 @@
-<div class="container-fluid p-4" style="background-color: #f4f9fc; min-height: 100vh;">
-
-  <button class="btn btn-link text-decoration-none px-0 mb-3" (click)="volver()">
-    <i class="bi bi-arrow-left"></i> Volver al inicio
-  </button>
-
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h3 class="fw-bold mb-0" style="color: #1a2b3c;">Mis Citas</h3>
-      <p class="text-muted mb-0">Historial y estado de tus citas médicas</p>
+<div style="min-height: 100vh; background-color: #f8f9fa; display: flex; flex-direction: column">
+  <nav class="navbar" style="background-color: #0070c0">
+    <div class="container-fluid px-4">
+      <button class="btn text-white" (click)="volver()">
+        <i class="bi bi-arrow-left me-1"></i> Volver
+      </button>
+      <span class="navbar-brand fw-bold text-white fs-5 mx-auto">
+        <i class="bi bi-heart-pulse-fill me-2"></i>Minsa Digital
+      </span>
     </div>
-    <button class="btn btn-info text-white fw-semibold" (click)="reservar()">
-      Reservar Cita
-    </button>
-  </div>
+  </nav>
 
-  <div class="card border-0 shadow-sm">
-    <div class="card-body p-0">
-      <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-          <thead>
-            <tr style="background-color: #eaf4fb;">
-              <th class="ps-3" style="color: #1a2b3c;">ID</th>
-              <th style="color: #1a2b3c;">Tipo</th>
-              <th style="color: #1a2b3c;">Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of misCitas()">
-              <td class="ps-3">{{ item.id_cita }}</td>
-              <td>{{ item.tipo_cita }}</td>
-              <td>
-                <span class="badge"
-                  [class.bg-warning]="item.estado_cita === 'pendiente'"
-                  [class.bg-success]="item.estado_cita === 'confirmada'"
-                  [class.bg-danger]="item.estado_cita === 'cancelada'"
-                  [class.text-dark]="item.estado_cita === 'pendiente'">
-                  {{ item.estado_cita }}
-                </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="container-fluid px-4 py-4">
+    <h4 class="fw-bold mb-1" style="color: #1a2b3c">Historial de citas</h4>
+    <p class="text-muted small mb-4">Revisa el detalle de tus citas anteriores</p>
+
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr style="background-color: #eaf4fb">
+                <th class="ps-3" style="color: #1a2b3c">Médico</th>
+                <th style="color: #1a2b3c">Fecha</th>
+                <th style="color: #1a2b3c">Hora</th>
+                <th style="color: #1a2b3c">Tipo</th>
+                <th style="color: #1a2b3c">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of misCitas()">
+                <td class="ps-3">Dr(a). {{ item.medico }}</td>
+                <td>{{ item.fecha | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ item.hora }}</td>
+                <td>{{ item.tipo_cita }}</td>
+                <td>
+                  <span
+                    class="badge rounded-pill"
+                    [class.bg-warning]="item.estado_cita === 'pendiente'"
+                    [class.bg-success]="item.estado_cita === 'confirmada'"
+                    [class.bg-danger]="item.estado_cita === 'cancelada'"
+                    [class.text-dark]="item.estado_cita === 'pendiente'"
+                  >
+                    {{ item.estado_cita }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="text-center py-5" [hidden]="misCitas().length > 0">
+          <i class="bi bi-calendar-x fs-1 text-muted"></i>
+          <p class="text-muted mt-2 mb-0">No tienes citas registradas</p>
+          <small class="text-muted">Cuando programes una cita, aparecerá aquí</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mt-4 p-3">
+      <h6 class="fw-bold mb-3" style="color: #1a2b3c">Leyenda</h6>
+      <div class="d-flex flex-wrap gap-3">
+        <span><span class="badge bg-warning text-dark me-1">pendiente</span> Cita por atender</span>
+        <span><span class="badge bg-success me-1">confirmada</span> Cita confirmada</span>
+        <span><span class="badge bg-danger me-1">cancelada</span> Cita cancelada</span>
       </div>
     </div>
   </div>
 
+  <div class="mt-auto py-3 px-4" style="background-color: #1a2b3c">
+    <p class="text-white-50 small mb-0 text-center">
+      Copyright © 2025. Ministerio de Salud del Perú.
+    </p>
+  </div>
 </div>
